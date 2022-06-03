@@ -2,13 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Touchable } from 'react-native';
 
 
-export default function Cep() {
+export default function Cep(props) {
   return (
   <>
-    <Text style={styles.butao}>Cidade:</Text>
-    <Text style={styles.butao}>Estado:</Text>
-    <Text style={styles.butao}>LOgradouro:</Text>
-    <Text style={styles.butao}>Complemento:</Text>
+    <Text style={styles.butao}>Cidade: {props.data.localidade}</Text>
+    <Text style={styles.butao}>Bairro:  {props.data.bairro}</Text>
+    <Text style={styles.butao}>Logradouro: {props.data.logradouro}</Text>
+    <Text style={styles.butao}>Complemento: {props.data.complemento}</Text>
   </>
   );
 }

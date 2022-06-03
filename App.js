@@ -1,8 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Touchable } from 'react-native';
 import Cep from './Components/Cep';
+import API from './Components/API';
 
 export default function App() {
+  const [cep, setCep] = useState("");
+  const [inputCep, setInputCep] = useState(0);
+
+  async function buscaCep(){
+    const response = await API.get('ws/'+inputCep+'/json/');
+    setCep(response.data);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.Text}>Digite seu Cep!</Text>
@@ -10,15 +19,18 @@ export default function App() {
       <TextInput style={styles.Textinput}
         placeholder='  Ex: 11730-000  '
         keyboardType='numeric'
+        onChangeText={(data)=>setInputCep(data)}
       />
       
       <TouchableOpacity
+        onPress={buscaCep}      
         style={styles.bloco}>
           <Text style={styles.Text}>
             Buscar
           </Text>
         </TouchableOpacity>
-        <Cep />
+
+        <Cep data={cep} />
 
     </View>
   );
